@@ -12,8 +12,9 @@ export function useAuth() {
       });
       const result = await response.json();
       if (result.success) {
-        sessionStorage.setItem('usuario', result.usuario);
-        setUsuario(result.usuario);
+        // CORREÇÃO: Pegando o nome de dentro de result.user.usuario
+        sessionStorage.setItem('usuario', result.user.usuario);
+        setUsuario(result.user.usuario);
         return { success: true };
       }
       return { success: false, error: result.error };
