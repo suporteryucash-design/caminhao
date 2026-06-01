@@ -8,11 +8,10 @@ export function useAuth() {
       const response = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuario: usuarioInput, senha: senhaInput })
+        body: JSON.stringify({ usuario: usuarioInput.trim().toLowerCase(), senha: senhaInput })
       });
       const result = await response.json();
       if (result.success) {
-        // CORREÇÃO: Pegando o nome de dentro de result.user.usuario
         sessionStorage.setItem('usuario', result.user.usuario);
         setUsuario(result.user.usuario);
         return { success: true };
